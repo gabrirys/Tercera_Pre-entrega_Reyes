@@ -1,11 +1,12 @@
 from django.shortcuts import render
+
 from mvt_app.models import Usuario, Contacto, Posteo
 
 
 
 def ver_usuarios(request):
     contexto = {
-            "estudiantes": Usuario.objects.all(),
+            "usuarios": Usuario.objects.all(),
     }
     http_response = render(
         request=request,
