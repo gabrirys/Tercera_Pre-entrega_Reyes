@@ -5,5 +5,5 @@ from mvt_app.views import ver_usuarios
 #from mvt_app.views import
 
 urlpatterns = [
-    path("usuarios/", ver_usuarios),
+    path("usuarios/", ver_usuarios, name="usuarios"),
 ]
