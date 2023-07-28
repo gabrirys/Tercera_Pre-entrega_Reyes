@@ -2,10 +2,35 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from mvt_app.models import Usuario, Contacto, Posteo
-from mvt_app.forms import ContactoFormulario
+from mvt_app.forms import ContactoFormulario, UsuarioFormulario
 
 #VISTAS DE USUARIO
-#def crear_usuario(request):
+def crear_usuarios(request):
+   if request.method == "POST":
+       formulario = UsuarioFormulario(request.POST)
+       if formulario.is_valid():
+           data = formulario.cleaned_data  # es un diccionario
+           nombre = data["nombre"]
+           apellido = data["apellido"]
+           email = data["email"]
+           nacimiento = data["nacimiento"]
+           usuario = data["usuario"]
+           
+           # lo crean solo en RAM
+           usuario = Usuario(nombre=nombre, apellido=apellido, email=email, nacimiento=nacimiento, usuario=usuario)  
+           usuario.save()  # Lo guardan en la Base de datos
+
+           # Redirecciono al usuario a la página ver usuarios
+           url_exitosa = reverse('usuarios')
+           return redirect(url_exitosa)
+   else:  # GET
+       formulario = UsuarioFormulario()
+   http_response = render(
+       request=request,
+       template_name='mvt_app/crear_usuarios.html',
+       context={'formulario': formulario}
+   )
+   return http_response
 
 
 def ver_usuarios(request):

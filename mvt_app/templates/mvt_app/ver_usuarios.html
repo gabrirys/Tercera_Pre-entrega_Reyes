@@ -13,7 +13,7 @@ Usuarios
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
                     <h1>Usuarios</h1>
-                    <span class="subheading"></span>
+                    <span class="subheading">Página para ver y crear usuarios</span>
                 </div>
             </div>
         </div>
@@ -24,6 +24,7 @@ Usuarios
 
 {% block contenido %}
 <h3>Usuarios creados:</h3>
+<a href="{% url 'crear_usuarios' %}">Crear nuevo usuario</a>
 <br>
 <ul>
 {% for usuario in usuarios %}
