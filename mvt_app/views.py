@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from mvt_app.models import Usuario, Contacto, Posteo
-from mvt_app.forms import ContactoFormulario, UsuarioFormulario
+from mvt_app.forms import ContactoFormulario, UsuarioFormulario, PosteoFormulario
 
 #VISTAS DE USUARIO
 def crear_usuarios(request):
@@ -58,6 +58,27 @@ def ver_posteo(request):
     return http_response
 
 
+def crear_posteo(request):
+   if request.method == "POST":
+       formulario = PosteoFormulario(request.POST)
+       if formulario.is_valid():
+           data = formulario.cleaned_data
+           titulo = data["titulo"]
+           contenido = data["contenido"]
+           fecha_publicado = data["fecha_publicado"]
+           autor = data["autor"]      
+           posteo = Posteo(titulo=titulo, contenido=contenido, fecha_publicado=fecha_publicado, autor=autor)  
+           posteo.save()
+           url_exitosa = reverse('crear_posteo')
+           return redirect(url_exitosa)
+   else:  # GET
+       formulario = PosteoFormulario()
+   http_response = render(
+       request=request,
+       template_name='mvt_app/crear_posteo.html',
+       context={'formulario': formulario}
+   )
+   return http_response
 
 
 #VISTA DE CONTACTO

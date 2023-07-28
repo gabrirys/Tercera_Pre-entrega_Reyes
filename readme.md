@@ -19,6 +19,8 @@ pip install -r requirements.txt
 ```
 
 + Ingresar con los datos del superusuario:
-username:admin
 <br>
+
+username:admin
+
 contraseña:gABBo2023
