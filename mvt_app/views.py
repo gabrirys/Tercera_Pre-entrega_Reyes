@@ -5,7 +5,7 @@ from mvt_app.models import Usuario, Contacto, Posteo
 from mvt_app.forms import ContactoFormulario, UsuarioFormulario, PosteoFormulario
 
 #VISTAS DE USUARIO
-def crear_usuarios(request):
+def crear_usuario(request):
    if request.method == "POST":
        formulario = UsuarioFormulario(request.POST)
        if formulario.is_valid():
@@ -33,17 +33,34 @@ def crear_usuarios(request):
    return http_response
 
 
-def ver_usuarios(request):
+def ver_usuario(request):
     contexto = {
             "usuarios": Usuario.objects.all(),
     }
     http_response = render(
         request=request,
-        template_name="mvt_app/ver_usuarios.html",
+        template_name='mvt_app/ver_usuarios.html',
         context=contexto,
         )
     return http_response
     
+    
+def buscar_usuario(request):
+    if request.method == "POST":
+        data = request.POST
+        busqueda = data["busqueda"]
+        usuario = Usuario.objects.filter(apellido__contains=busqueda)
+        contexto = {
+            "usuarios": usuario,
+        }
+        http_response = render(
+            request=request,
+            template_name='mvt_app/ver_usuarios.html',
+            context=contexto,
+        )
+        return http_response
+            
+
 
 #VISTAS DE POSTEO
 def ver_posteo(request):
