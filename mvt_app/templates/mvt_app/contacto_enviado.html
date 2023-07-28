@@ -22,9 +22,4 @@ Contacto
 {% endblock titulo %}
 
 {% block contenido %}
-<form method="post">
-    {% csrf_token %}
-    {{ formulario.as_p }}
-    <input type="submit" value="Enviar" />
-</form>
 {% endblock contenido %}

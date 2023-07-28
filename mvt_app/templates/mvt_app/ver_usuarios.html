@@ -21,5 +21,15 @@ Usuarios
 </header>
 {% endblock titulo %}
 
+
 {% block contenido %}
+<h3>Usuarios creados:</h3>
+<br>
+<ul>
+{% for usuario in usuarios %}
+  <li>
+    {{ usuario.apellido }}, {{ usuario.nombre }} -{{ usuario.usuario }}-
+    </li> 
+    {% endfor %}
+</ul>
 {% endblock contenido %}
